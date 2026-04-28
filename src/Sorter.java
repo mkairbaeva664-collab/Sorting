@@ -70,6 +70,6 @@ public class Sorter {
             arr[i] = rand.nextInt(1000);
         }
 
-        return arr
+        return arr;
     }
 }
