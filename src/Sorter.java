@@ -20,7 +20,7 @@ public class Sorter {
 
     public void advancedSort(int[] arr) {
         if(arr == null || arr.length == 0) return;
-        quickSort(arr, 0, arr.length - 1)
+        quickSort(arr, 0, arr.length - 1);
     }
 
     private void quickSort(int[] arr, int start, int end) {
