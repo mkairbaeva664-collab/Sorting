@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Sorter {
 
     public void basicSort(int[] arr) {
@@ -59,5 +61,15 @@ public class Sorter {
         System.out.println();
     }
 
+    public int[] generateRandomArray(int size) {
+        Random rand = new Random();
 
+        int[] arr = new int[size];
+
+        for (int i = 0; i < size; i++) {
+            arr[i] = rand.nextInt(1000);
+        }
+
+        return arr
+    }
 }
