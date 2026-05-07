@@ -27,32 +27,49 @@ public class Experiment {
     }
 
     public void runAllExperiments() {
-        Sorter sorter = new Sorter();
-        int[] sizes = {10, 100, 1000};
+        int[] sizes = {10, 100, 1000}; // Размеры из задания [cite: 1, 55]
         String[] types = {"Random", "Sorted"};
 
         for (int size : sizes) {
             for (String dataType : types) {
-                int[] array;
+                System.out.println("\n--- Experiment: Size " + size + ", Data: " + dataType + " ---");
 
-                if (dataType.equals("Random")) {
-                    array = sorter.generateRandomArray(size);
-                } else {
-                    array = sorter.generateRandomArray(size);
-                    sorter.advancedSort(array);
+                // 1. Генерация исходного массива [cite: 1, 30]
+                int[] originalArray = sorter.generateRandomArray(size);
+                if (dataType.equals("Sorted")) {
+                    sorter.advancedSort(originalArray);
                 }
 
-                int[] copyForBasic = array.clone();
-                int[] copyForAdvanced = array.clone();
+                // Выводим неотсортированный список (только для небольших размеров для чистоты вывода )
+                if (size <= 10) {
+                    System.out.print("Original Array: ");
+                    sorter.printArray(originalArray);
+                }
 
+                // 2. Подготовка копий для честного сравнения
+                int[] copyForBasic = originalArray.clone();
+                int[] copyForAdvanced = originalArray.clone();
+
+                // 3. Замер времени и сортировка [cite: 1, 37, 70]
                 long basicTime = measureSortTime(copyForBasic, "basic");
                 long advancedTime = measureSortTime(copyForAdvanced, "advanced");
 
-                int target = copyForAdvanced[size - 1];
+                // Выводим отсортированный список (для Small размера)
+                if (size <= 10) {
+                    System.out.print("Sorted Array (Basic): ");
+                    sorter.printArray(copyForBasic);
+                    System.out.print("Sorted Array (Advanced): ");
+                    sorter.printArray(copyForAdvanced);
+                }
+
+                // 4. Поиск (Binary Search требует отсортированного массива [cite: 1, 82])
+                int target = copyForAdvanced[size - 1]; // Ищем последний элемент
                 long searchTime = measureSearchTime(copyForAdvanced, target);
 
-                System.out.printf("%-10d | %-10s | %-15d | %-15d | %-15d%n",
-                        size, dataType, basicTime, advancedTime, searchTime);
+                // 5. Вывод времени [cite: 1, 72]
+                System.out.println("Time Basic Sort: " + basicTime + " ns");
+                System.out.println("Time Advanced Sort: " + advancedTime + " ns");
+                System.out.println("Time Search: " + searchTime + " ns");
             }
         }
     }

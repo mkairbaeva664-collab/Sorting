@@ -7,7 +7,8 @@ public class Sorter {
         for (int i = 0; i < arr.length - 1; i++) {
             int min = arr[i];
             int indexOfMin = i;
-            for (int j = 0; j < arr.length; j++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                //find minimum number
                 if(arr[j] < min) {
                     min = arr[j];
                     indexOfMin = j;
@@ -56,7 +57,7 @@ public class Sorter {
 
     public void printArray(int[] arr) {
         for (int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i] + " ");
+            System.out.print(arr[i] + " ");
         }
         System.out.println();
     }
