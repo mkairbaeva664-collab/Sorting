@@ -1,4 +1,5 @@
 public class Searcher {
+    //Binary Search
     public int search(int[] arr, int target) {
         int start = 0;
         int end = arr.length - 1;
